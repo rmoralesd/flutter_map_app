@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:maps_app/screens/screens.dart';
 
-void main() => runApp(MapsApp());
+void main() => runApp(const MapsApp());
 
 class MapsApp extends StatelessWidget {
+  const MapsApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'MapsApp',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
-    );
+    return const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'MapsApp',
+        home: LoadingScreen());
   }
 }
