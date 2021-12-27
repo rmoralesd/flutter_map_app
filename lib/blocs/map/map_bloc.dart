@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -20,6 +21,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<OnMapInitializedEvent>(_onInitMap);
 
     locationStream = locationBloc.stream.listen((event) {
+      if (event.lastKnownLocation != null) {
+        add(OnUpdateUserPolylinesEvent(event.myLocationHistory));
+      }
       if (!state.isFollowingUser) return;
       if (event.lastKnownLocation == null) return;
 
@@ -32,6 +36,23 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     });
 
     on<OnStartFollowingUserMapEvent>(_onStartFollowingUser);
+
+    on<OnUpdateUserPolylinesEvent>(_onPolylinenewPoint);
+  }
+
+  void _onPolylinenewPoint(
+      OnUpdateUserPolylinesEvent event, Emitter<MapState> emit) {
+    final myRoute = Polyline(
+        polylineId: const PolylineId('myRoute'),
+        color: Colors.black,
+        width: 5,
+        startCap: Cap.roundCap,
+        endCap: Cap.roundCap,
+        points: event.userLocations);
+
+    final currentPolylines = Map<String, Polyline>.from(state.polylines);
+    currentPolylines['myRoute'] = myRoute;
+    emit(state.copyWith(polylines: currentPolylines));
   }
 
   void _onInitMap(OnMapInitializedEvent event, Emitter<MapState> emit) {
