@@ -38,6 +38,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<OnStartFollowingUserMapEvent>(_onStartFollowingUser);
 
     on<OnUpdateUserPolylinesEvent>(_onPolylinenewPoint);
+
+    on<OnToggleShowUserRouteMapEvent>(
+        (event, emit) => emit(state.copyWith(showMyRoute: !state.showMyRoute)));
   }
 
   void _onPolylinenewPoint(
