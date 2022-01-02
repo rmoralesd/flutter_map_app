@@ -69,7 +69,9 @@ class _ManualMarkerBody extends StatelessWidget {
                   final end = mapBloc.mapCenter;
                   if (end == null) return;
 
-                  await searchBloc.getCoorsStartToEnd(start, end);
+                  final destination =
+                      await searchBloc.getCoorsStartToEnd(start, end);
+                  mapBloc.drawRoutePolyline(destination);
                 },
               ),
             ),
