@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:maps_app/models/models.dart';
 import 'package:maps_app/services/service.dart';
 
 class TrafficService {
@@ -9,13 +10,15 @@ class TrafficService {
   TrafficService()
       : _dioTraffic = Dio()..interceptors.add(TrafficInterceptor());
 
-  Future getCoordsStartToEnd(LatLng start, LatLng end) async {
+  Future<TrafficResponse> getCoordsStartToEnd(LatLng start, LatLng end) async {
     final coorsString =
         '${start.longitude},${start.latitude};${end.longitude},${end.latitude}';
     final url = '$_basicTrafficUrl/driving/$coorsString';
 
     final resp = await _dioTraffic.get(url);
 
-    return resp.data;
+    final data = TrafficResponse.fromMap(resp.data);
+
+    return data;
   }
 }
