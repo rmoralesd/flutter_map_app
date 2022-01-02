@@ -9,7 +9,6 @@ class SearchResult {
 
   @override
   String toString() {
-    // TODO: implement toString
     return '{cancel:$cancel, manual:$manual}';
   }
 }

@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animate_do: ^2.0.0
   bloc: ^8.0.1
   cupertino_icons: ^1.0.2
   equatable: ^2.0.3
@@ -35,9 +36,9 @@ dependencies:
   flutter_bloc: ^8.0.0
   geolocator: ^8.0.1
   permission_handler: ^8.3.0
-  animate_do: ^2.0.0
 
 dev_dependencies:
+  dio: ^4.0.4
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
