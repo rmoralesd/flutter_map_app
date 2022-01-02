@@ -82,7 +82,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     _mapController?.animateCamera(cameraUpdate);
   }
 
-  void drawRoutePolyline(RouteDestination destination) async {
+  Future drawRoutePolyline(RouteDestination destination) async {
     final myRoute = Polyline(
         polylineId: const PolylineId('route'),
         width: 5,
