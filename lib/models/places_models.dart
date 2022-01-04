@@ -97,6 +97,11 @@ class Feature {
         "geometry": geometry.toMap(),
         "context": List<dynamic>.from(context.map((x) => x.toMap())),
       };
+
+  @override
+  String toString() {
+    return 'Feature:$text';
+  }
 }
 
 class Context {
