@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maps_app/blocs/blocs.dart';
 import 'package:maps_app/models/models.dart' as models;
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
 
 class SearchDestinationDelegate extends SearchDelegate<models.SearchResult> {
   SearchDestinationDelegate() : super(searchFieldLabel: 'Buscar...');
@@ -47,7 +48,14 @@ class SearchDestinationDelegate extends SearchDelegate<models.SearchResult> {
                   color: Colors.black,
                 ),
                 onTap: () {
-                  print('enviar este lugar $place');
+                  final result = models.SearchResult(
+                    cancel: false,
+                    manual: false,
+                    position: LatLng(place.center[1], place.center[0]),
+                    name: place.text,
+                    description: place.placeName,
+                  );
+                  close(context, result);
                 },
               );
             },
