@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maps_app/blocs/blocs.dart';
 import 'package:maps_app/delegates/delegates.dart';
-import 'package:maps_app/models/models.dart';
+import 'package:maps_app/models/models.dart' as models;
 
 class SearchBar extends StatelessWidget {
   const SearchBar({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class SearchBar extends StatelessWidget {
 class _SearchBarBody extends StatelessWidget {
   const _SearchBarBody({Key? key}) : super(key: key);
 
-  void onSearchResults(BuildContext context, SearchResult result) {
+  void onSearchResults(BuildContext context, models.SearchResult result) {
     final searchBloc = BlocProvider.of<SearchBloc>(context);
     if (result.manual == true) {
       searchBloc.add(OnActivateManualMarkerEvent());

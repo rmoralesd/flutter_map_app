@@ -34,6 +34,8 @@ class TrafficService {
       'proximity': '${proximity.longitude},${proximity.latitude}'
     });
 
-    return [];
+    final placesResponse = PlacesResponse.fromJson(resp.data);
+
+    return placesResponse.features;
   }
 }
