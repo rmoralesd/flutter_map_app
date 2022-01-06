@@ -101,6 +101,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     currentPolylines['route'] = myRoute;
 
     final markerImage = await getAssetImageMarker();
+    final endMarkerImage = await getNetworkImageMarker();
 
     final startMarker = Marker(
         markerId: const MarkerId('start'),
@@ -114,6 +115,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     final endMarker = Marker(
         markerId: const MarkerId('end'),
         position: destination.points.last,
+        icon: endMarkerImage,
+        //anchor: const Offset(0, 0),
         infoWindow: InfoWindow(
           title: destination.endPlace.text,
           snippet: destination.endPlace.placeName,
