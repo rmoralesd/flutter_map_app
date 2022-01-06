@@ -9,7 +9,7 @@ class PlacesInterceptor extends Interceptor {
     options.queryParameters.addAll({
       'access_token': accessToken,
       'language': 'es',
-      'limit': 7,
+      //'limit': 7, //Fue necesario quitarlo por un error cuando ese limite viene desde un llamado a la función
     });
     super.onRequest(options, handler);
   }
