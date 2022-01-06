@@ -45,7 +45,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         (event, emit) => emit(state.copyWith(showMyRoute: !state.showMyRoute)));
 
     on<OnDisplayPolylinesEvent>((event, emit) {
-      emit(state.copyWith(polylines: event.polylines));
+      emit(state.copyWith(polylines: event.polylines, markers: event.markers));
     });
   }
 
@@ -94,7 +94,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     final currentPolylines = Map<String, Polyline>.from(state.polylines);
     currentPolylines['route'] = myRoute;
 
-    add(OnDisplayPolylinesEvent(currentPolylines));
+    final startMarker = Marker(
+        markerId: const MarkerId('start'), position: destination.points.first);
+
+    final endMarker = Marker(
+        markerId: const MarkerId('end'), position: destination.points.last);
+    final currentMarkers = Map<String, Marker>.from(state.markers);
+    currentMarkers['start'] = startMarker;
+    currentMarkers['end'] = endMarker;
+
+    add(OnDisplayPolylinesEvent(currentPolylines, currentMarkers));
   }
 
   @override
