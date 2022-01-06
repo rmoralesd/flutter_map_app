@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:maps_app/blocs/location/location_bloc.dart';
+import 'package:maps_app/helpers/helpers.dart';
 import 'package:maps_app/models/models.dart';
 import 'package:maps_app/themes/themes.dart';
 
@@ -99,11 +100,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     final currentPolylines = Map<String, Polyline>.from(state.polylines);
     currentPolylines['route'] = myRoute;
 
+    final markerImage = await getAssetImageMarker();
+
     final startMarker = Marker(
         markerId: const MarkerId('start'),
         position: destination.points.first,
-        infoWindow:
-            const InfoWindow(title: 'Inicio', snippet: 'Marcador inicial'));
+        icon: markerImage,
+        infoWindow: InfoWindow(
+          title: 'Inicio',
+          snippet: 'Kms: $kms, duration: $tripDuration',
+        ));
 
     final endMarker = Marker(
         markerId: const MarkerId('end'),
