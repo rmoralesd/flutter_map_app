@@ -22,9 +22,9 @@ Future<BitmapDescriptor> getEndCustomMarker(
   final recorder = ui.PictureRecorder();
   final canvas = ui.Canvas(recorder);
   const size = ui.Size(350, 150);
-  final startMarker =
-      StartMarkerPainter(minutes: kilometers, destination: destination);
-  startMarker.paint(canvas, size);
+  final endMarker =
+      EndMarkerPainter(kilometers: kilometers, destination: destination);
+  endMarker.paint(canvas, size);
 
   final picture = recorder.endRecording();
   final image = await picture.toImage(size.width.toInt(), size.height.toInt());

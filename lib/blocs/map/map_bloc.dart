@@ -100,36 +100,46 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     final currentPolylines = Map<String, Polyline>.from(state.polylines);
     currentPolylines['route'] = myRoute;
 
-    final markerImage = await getAssetImageMarker();
-    final endMarkerImage = await getNetworkImageMarker();
+    //Marcadores desde assets
+    //final markerImage = await getAssetImageMarker();
+    //final endMarkerImage = await getNetworkImageMarker();
+
+    //Marcadores desde customMarkers
+    final markerImage =
+        await getStartCustomMarker(tripDuration, 'Mi ubicacion');
+    final endMarkerImage =
+        await getEndCustomMarker(kms, destination.endPlace.text);
 
     final startMarker = Marker(
-        markerId: const MarkerId('start'),
-        position: destination.points.first,
-        icon: markerImage,
-        infoWindow: InfoWindow(
-          title: 'Inicio',
-          snippet: 'Kms: $kms, duration: $tripDuration',
-        ));
+      markerId: const MarkerId('start'),
+      anchor: const Offset(0.1, 1),
+      position: destination.points.first,
+      icon: markerImage,
+      // infoWindow: InfoWindow(
+      //   title: 'Inicio',
+      //   snippet: 'Kms: $kms, duration: $tripDuration',
+      // ),
+    );
 
     final endMarker = Marker(
-        markerId: const MarkerId('end'),
-        position: destination.points.last,
-        icon: endMarkerImage,
-        //anchor: const Offset(0, 0),
-        infoWindow: InfoWindow(
-          title: destination.endPlace.text,
-          snippet: destination.endPlace.placeName,
-        ));
+      markerId: const MarkerId('end'),
+      position: destination.points.last,
+      icon: endMarkerImage,
+      //anchor: const Offset(0, 0),
+      // infoWindow: InfoWindow(
+      //   title: destination.endPlace.text,
+      //   snippet: destination.endPlace.placeName,
+      // ),
+    );
     final currentMarkers = Map<String, Marker>.from(state.markers);
     currentMarkers['start'] = startMarker;
     currentMarkers['end'] = endMarker;
 
     add(OnDisplayPolylinesEvent(currentPolylines, currentMarkers));
 
-    await Future.delayed(const Duration(milliseconds: 300));
+    //await Future.delayed(const Duration(milliseconds: 300));
 
-    _mapController?.showMarkerInfoWindow(const MarkerId('end'));
+    //_mapController?.showMarkerInfoWindow(const MarkerId('end'));
   }
 
   @override
