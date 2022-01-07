@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maps_app/markers/end_marker.dart';
 import 'package:maps_app/markers/markers.dart';
 
 class TestMarkerScreen extends StatelessWidget {
@@ -12,8 +13,8 @@ class TestMarkerScreen extends StatelessWidget {
           width: 350,
           height: 150,
           child: CustomPaint(
-            painter: StartMarkerPainter(
-                minutes: 55, destination: 'Mi casa hola hola hola'),
+            painter: EndMarkerPainter(
+                kilometers: 55, destination: 'Tu casa hola hola hola'),
           ),
         ),
       ),
