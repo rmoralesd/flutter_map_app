@@ -87,7 +87,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     final myRoute = Polyline(
         polylineId: const PolylineId('route'),
         width: 5,
-        color: Colors.black,
+        color: Colors.green,
         points: destination.points,
         startCap: Cap.roundCap,
         endCap: Cap.roundCap);
